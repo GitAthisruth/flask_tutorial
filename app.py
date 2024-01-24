@@ -1,6 +1,9 @@
 from flask import Flask,render_template,request
+import os
 
 app = Flask(__name__)
+
+app.config['UPLOAD_PATH'] = 'static/images'#uploading path
 
 # @app.route('/') #'/' - to refer homepage
 # def home():
@@ -27,22 +30,22 @@ app = Flask(__name__)
 #         return 'You are allowed'
 
 
-# @app.route('/about')
-# def about():
-#     return "about page"
+@app.route('/about')
+def about():
+    return "about page"
 
-# @app.route('/product')
-# def product():
-#     return "product page"
+@app.route('/product')
+def product():
+    return "product page"
 
-# @app.route('/laptop')
-# def laptop():
-#     return "laptop page"
+@app.route('/laptop')
+def laptop():
+    return "laptop page"
 
 
-# @app.route('/contact')
-# def contact():
-#     return "contact page"
+@app.route('/contact')
+def contact():
+    return "contact page"
 
 
 
@@ -70,9 +73,9 @@ app = Flask(__name__)
 # app.add_url_rule('/home','home',home) #'home' -end point name ,home -function name
 
 
-@app.route('/') #'/' - to give dynamic url 
-def form():
-    return render_template('form_post_method.html')
+# @app.route('/') #'/' - to give dynamic url 
+# def form():
+#     return render_template('form_post_method.html')
 
 # register get method
 # @app.route('/register_get_method',methods=['GET'])
@@ -85,15 +88,27 @@ def form():
 
 # register post method
 
-@app.route('/register',methods=['POST'])#using post method we cannot see the input details inside the url
-def register():  #how to store the values that we enter in the form to a variable. 
-    name = request.form['name'] #we need to add the 'name' that we given inside the html tag. 
-    number = request.form['number']
-    email = request.form['email']
-    return render_template('register.html', name = name, number = number, email = email)
+# @app.route('/register',methods=['POST'])#using post method we cannot see the input details inside the url
+# def register():  #how to store the values that we enter in the form to a variable. 
+#     name = request.form['name'] #we need to add the 'name' that we given inside the html tag. 
+#     number = request.form['number']
+#     email = request.form['email']
+#     return render_template('register.html', name = name, number = number, email = email)
 
 
 #In form actions we give the link used to move to new page after clicking the submit button. 
+
+@app.route('/') #'/' - to give dynamic url 
+def form():
+    return render_template('file_upload.html')
+
+
+@app.route('/upload', methods = ['POST'])
+def upload():
+    file =request.files['file']
+    file.save(os.path.join(app.config['UPLOAD_PATH'], file.filename))
+    return "Uploaded successfully"
+
 
 if __name__ == "__main__":
     app.run(debug=True)#debug=True adding this feature to get result in the browser directly without rerunning the server. 
@@ -123,7 +138,7 @@ if __name__ == "__main__":
 
 # <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css')}}"> 
 
-
+# To improve the formatting of your HTML source code, you can use the Format Document command Ctrl+Shift+I to format the entire file or Format Selection Ctrl+K Ctrl+F to just format the selected text.
 
 
     
