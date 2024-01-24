@@ -32,21 +32,36 @@ app.config['UPLOAD_PATH'] = 'static/images'#uploading path
 
 @app.route('/about')
 def about():
-    return "about page"
-
+    return render_template('about.html')
 @app.route('/product')
 def product():
-    return "product page"
-
-@app.route('/laptop')
-def laptop():
-    return "laptop page"
+    return render_template('product.html')
 
 
 @app.route('/contact')
 def contact():
-    return "contact page"
+    return render_template('contact.html')
 
+@app.route('/login',methods=['GET','POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        if request.form['text'] == 'user' and request.form['password'] == 'hello':
+            return render_template('dashboard.html')
+        else:
+            error = "Wrong username or password"
+            return render_template('login.html', error=error)
+    else:
+        return render_template('login.html')
+
+        
+
+
+
+
+# @app.route('/laptop')
+# def laptop():
+#     return "laptop page"
 
 
 # @app.route('/') #'/' - to give dynamic url 
@@ -98,9 +113,13 @@ def contact():
 
 #In form actions we give the link used to move to new page after clicking the submit button. 
 
+# @app.route('/') #'/' - to give dynamic url 
+# def form():
+#     return render_template('file_upload.html')
+
 @app.route('/') #'/' - to give dynamic url 
-def form():
-    return render_template('file_upload.html')
+def homepage():
+    return render_template('homepage.html')
 
 
 @app.route('/upload', methods = ['POST'])
