@@ -114,6 +114,7 @@ if __name__ == "__main__":
     
 
 # we can add style to our html by giving  link to our css file 
+#never add comas in html files
 
 # eg:<link rel="stylesheet" href="./static/css/style.css"> 
     
