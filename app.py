@@ -120,7 +120,7 @@ if __name__ == "__main__":
 
     # or
 
-<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css')}}"> 
+# <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css')}}"> 
 
 
 
